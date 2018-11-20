@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import EventEmitterDemo
+@testable import DynamicDataDrivenApp
 
 class DashboardPresenterTests: XCTestCase {
     

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import EventEmitterDemo
+@testable import DynamicDataDrivenApp
 
 // This class is already mocked in this POC, so it's tested in a very limited way
 

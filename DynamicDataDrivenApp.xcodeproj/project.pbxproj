@@ -29,6 +29,7 @@
 		CC281D9120E4C9CF00CE2673 /* ApplicationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC281D9020E4C9CF00CE2673 /* ApplicationServices.swift */; };
 		CC281D9320E524C300CE2673 /* PaymentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC281D9220E524C300CE2673 /* PaymentsPresenter.swift */; };
 		CC281D9F20E6428400CE2673 /* PaymentsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC281D9E20E6428400CE2673 /* PaymentsWireframe.swift */; };
+		CC3CD3CE21A3EB5100C582D7 /* ServiceParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CD3CD21A3EB5100C582D7 /* ServiceParserTests.swift */; };
 		CC42FC1E210B07F500E80907 /* DashboardStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC42FC1D210B07F500E80907 /* DashboardStoryboard.storyboard */; };
 		CC42FC20210B11DA00E80907 /* DashboardModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42FC1F210B11DA00E80907 /* DashboardModule.swift */; };
 		CC42FC22210B11ED00E80907 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42FC21210B11ED00E80907 /* DashboardViewController.swift */; };
@@ -68,6 +69,9 @@
 		CC42FCAA211DB68200E80907 /* DashboardPaymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC42FCA9211DB68200E80907 /* DashboardPaymentCell.xib */; };
 		CC42FCAD2121D55A00E80907 /* EventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42FCAC2121D55A00E80907 /* EventEmitter.swift */; };
 		CC42FCAF2121D88400E80907 /* DashboardEventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42FCAE2121D88400E80907 /* DashboardEventEmitter.swift */; };
+		CC63FA4F2196F079009DC43E /* Pay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC63FA4E2196F079009DC43E /* Pay.swift */; };
+		CC63FA5121981B0F009DC43E /* Pay.json in Resources */ = {isa = PBXBuildFile; fileRef = CC63FA5021981B0F009DC43E /* Pay.json */; };
+		CC63FA5321981EA5009DC43E /* ApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC63FA5221981EA5009DC43E /* ApplicationService.swift */; };
 		CC858FC7213535B10047BE28 /* DashboardAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC858FC6213535B10047BE28 /* DashboardAnalytics.swift */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +121,7 @@
 		CC281D9020E4C9CF00CE2673 /* ApplicationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationServices.swift; sourceTree = "<group>"; };
 		CC281D9220E524C300CE2673 /* PaymentsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsPresenter.swift; sourceTree = "<group>"; };
 		CC281D9E20E6428400CE2673 /* PaymentsWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsWireframe.swift; sourceTree = "<group>"; };
+		CC3CD3CD21A3EB5100C582D7 /* ServiceParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceParserTests.swift; sourceTree = "<group>"; };
 		CC42FC1D210B07F500E80907 /* DashboardStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DashboardStoryboard.storyboard; sourceTree = "<group>"; };
 		CC42FC1F210B11DA00E80907 /* DashboardModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModule.swift; sourceTree = "<group>"; };
 		CC42FC21210B11ED00E80907 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +161,9 @@
 		CC42FCA9211DB68200E80907 /* DashboardPaymentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardPaymentCell.xib; sourceTree = "<group>"; };
 		CC42FCAC2121D55A00E80907 /* EventEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEmitter.swift; sourceTree = "<group>"; };
 		CC42FCAE2121D88400E80907 /* DashboardEventEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardEventEmitter.swift; sourceTree = "<group>"; };
+		CC63FA4E2196F079009DC43E /* Pay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pay.swift; sourceTree = "<group>"; };
+		CC63FA5021981B0F009DC43E /* Pay.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Pay.json; sourceTree = "<group>"; };
+		CC63FA5221981EA5009DC43E /* ApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationService.swift; sourceTree = "<group>"; };
 		CC858FC6213535B10047BE28 /* DashboardAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardAnalytics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -232,7 +240,9 @@
 				3E3FE54120B36435000C3783 /* Storyboards */,
 				3E6F83DF20657527004AF262 /* Helpers */,
 				3E5987A620618A290024F7F7 /* Modules */,
+				CC63FA4B2196EF56009DC43E /* Use Cases */,
 				3E5987A3206188700024F7F7 /* Routing */,
+				CC63FA4C2196EF89009DC43E /* ApplicationServices */,
 				3E59876F2061879F0024F7F7 /* AppDelegate.swift */,
 				3E5987712061879F0024F7F7 /* ViewController.swift */,
 				3E5987732061879F0024F7F7 /* Main.storyboard */,
@@ -247,6 +257,7 @@
 		3E5987832061879F0024F7F7 /* DynamicDataDrivenAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				CC3CD3CC21A3EB1000C582D7 /* ApplicationServices */,
 				CC42FC4B211845A300E80907 /* Modules */,
 				3E5987842061879F0024F7F7 /* APIClientArchitectureDemoTests.swift */,
 				3E5987862061879F0024F7F7 /* Info.plist */,
@@ -293,6 +304,14 @@
 				CC42FC4121108EC800E80907 /* UIViewExtensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CC3CD3CC21A3EB1000C582D7 /* ApplicationServices */ = {
+			isa = PBXGroup;
+			children = (
+				CC3CD3CD21A3EB5100C582D7 /* ServiceParserTests.swift */,
+			);
+			path = ApplicationServices;
 			sourceTree = "<group>";
 		};
 		CC42FC1C210B07A800E80907 /* Dashboard */ = {
@@ -392,6 +411,31 @@
 				CC42FCAC2121D55A00E80907 /* EventEmitter.swift */,
 			);
 			path = Events;
+			sourceTree = "<group>";
+		};
+		CC63FA4B2196EF56009DC43E /* Use Cases */ = {
+			isa = PBXGroup;
+			children = (
+				CC63FA4D2196F001009DC43E /* Pay */,
+			);
+			path = "Use Cases";
+			sourceTree = "<group>";
+		};
+		CC63FA4C2196EF89009DC43E /* ApplicationServices */ = {
+			isa = PBXGroup;
+			children = (
+				CC63FA5221981EA5009DC43E /* ApplicationService.swift */,
+			);
+			path = ApplicationServices;
+			sourceTree = "<group>";
+		};
+		CC63FA4D2196F001009DC43E /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				CC63FA4E2196F079009DC43E /* Pay.swift */,
+				CC63FA5021981B0F009DC43E /* Pay.json */,
+			);
+			path = Pay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -504,6 +548,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC63FA5121981B0F009DC43E /* Pay.json in Resources */,
 				CC42FC1E210B07F500E80907 /* DashboardStoryboard.storyboard in Resources */,
 				3E59877A2061879F0024F7F7 /* LaunchScreen.storyboard in Resources */,
 				3E5987772061879F0024F7F7 /* Assets.xcassets in Resources */,
@@ -555,6 +600,7 @@
 				CC42FC482112FC2500E80907 /* DashboardPaymentCell.swift in Sources */,
 				CC42FC2A210B15E300E80907 /* DashboardInteractor.swift in Sources */,
 				CC42FC24210B123500E80907 /* LastPaymentsViewController.swift in Sources */,
+				CC63FA5321981EA5009DC43E /* ApplicationService.swift in Sources */,
 				CC42FC462112EC5B00E80907 /* DashboardPaymentViewModel.swift in Sources */,
 				3E6F83E7206958F7004AF262 /* NetworkService.swift in Sources */,
 				CC42FC20210B11DA00E80907 /* DashboardModule.swift in Sources */,
@@ -574,6 +620,7 @@
 				CC42FC4221108EC800E80907 /* UIViewExtensions.swift in Sources */,
 				CC281D9F20E6428400CE2673 /* PaymentsWireframe.swift in Sources */,
 				CC42FC34210F1CA300E80907 /* TopHighlight.swift in Sources */,
+				CC63FA4F2196F079009DC43E /* Pay.swift in Sources */,
 				3E6F83E52068C5D3004AF262 /* PaymentsModule.swift in Sources */,
 				CC42FC38210F570800E80907 /* TopHighlightView.swift in Sources */,
 				CC42FCAF2121D88400E80907 /* DashboardEventEmitter.swift in Sources */,
@@ -589,6 +636,7 @@
 				CC42FC642118695F00E80907 /* TopHighlightViewModelTests.swift in Sources */,
 				CC42FC6621186E9B00E80907 /* TopHighlightsSectionViewModelTests.swift in Sources */,
 				CC42FC5121184B8E00E80907 /* DashboardModuleTests.swift in Sources */,
+				CC3CD3CE21A3EB5100C582D7 /* ServiceParserTests.swift in Sources */,
 				CC42FC5B21185EC600E80907 /* TopHighlightTests.swift in Sources */,
 				CC42FC68211885E500E80907 /* DashboardPaymentViewModelTests.swift in Sources */,
 				3E5987852061879F0024F7F7 /* APIClientArchitectureDemoTests.swift in Sources */,
@@ -790,7 +838,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JP9LNGT4C2;
-				INFOPLIST_FILE = EventEmitterDemoTests/Info.plist;
+				INFOPLIST_FILE = DynamicDataDrivenAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mdc.EventEmitterDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -807,7 +855,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JP9LNGT4C2;
-				INFOPLIST_FILE = EventEmitterDemoTests/Info.plist;
+				INFOPLIST_FILE = DynamicDataDrivenAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mdc.EventEmitterDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -823,7 +871,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JP9LNGT4C2;
-				INFOPLIST_FILE = EventEmitterDemoUITests/Info.plist;
+				INFOPLIST_FILE = DynamicDataDrivenAppUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mdc.EventEmitterDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -839,7 +887,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JP9LNGT4C2;
-				INFOPLIST_FILE = EventEmitterDemoUITests/Info.plist;
+				INFOPLIST_FILE = DynamicDataDrivenAppUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mdc.EventEmitterDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
