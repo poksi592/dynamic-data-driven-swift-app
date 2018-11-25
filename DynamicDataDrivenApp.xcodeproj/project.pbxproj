@@ -29,7 +29,9 @@
 		CC281D9120E4C9CF00CE2673 /* ApplicationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC281D9020E4C9CF00CE2673 /* ApplicationServices.swift */; };
 		CC281D9320E524C300CE2673 /* PaymentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC281D9220E524C300CE2673 /* PaymentsPresenter.swift */; };
 		CC281D9F20E6428400CE2673 /* PaymentsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC281D9E20E6428400CE2673 /* PaymentsWireframe.swift */; };
-		CC3CD3CE21A3EB5100C582D7 /* ServiceParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CD3CD21A3EB5100C582D7 /* ServiceParserTests.swift */; };
+		CC3CD3CE21A3EB5100C582D7 /* ApplicationServiceParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CD3CD21A3EB5100C582D7 /* ApplicationServiceParserTests.swift */; };
+		CC3CD3D021A44E3A00C582D7 /* ApplicationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CD3CF21A44E3A00C582D7 /* ApplicationServiceTests.swift */; };
+		CC3CD3D221A4510E00C582D7 /* MockPayUseCase.json in Resources */ = {isa = PBXBuildFile; fileRef = CC3CD3D121A4510E00C582D7 /* MockPayUseCase.json */; };
 		CC42FC1E210B07F500E80907 /* DashboardStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC42FC1D210B07F500E80907 /* DashboardStoryboard.storyboard */; };
 		CC42FC20210B11DA00E80907 /* DashboardModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42FC1F210B11DA00E80907 /* DashboardModule.swift */; };
 		CC42FC22210B11ED00E80907 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42FC21210B11ED00E80907 /* DashboardViewController.swift */; };
@@ -121,7 +123,9 @@
 		CC281D9020E4C9CF00CE2673 /* ApplicationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationServices.swift; sourceTree = "<group>"; };
 		CC281D9220E524C300CE2673 /* PaymentsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsPresenter.swift; sourceTree = "<group>"; };
 		CC281D9E20E6428400CE2673 /* PaymentsWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsWireframe.swift; sourceTree = "<group>"; };
-		CC3CD3CD21A3EB5100C582D7 /* ServiceParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceParserTests.swift; sourceTree = "<group>"; };
+		CC3CD3CD21A3EB5100C582D7 /* ApplicationServiceParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationServiceParserTests.swift; sourceTree = "<group>"; };
+		CC3CD3CF21A44E3A00C582D7 /* ApplicationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationServiceTests.swift; sourceTree = "<group>"; };
+		CC3CD3D121A4510E00C582D7 /* MockPayUseCase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockPayUseCase.json; sourceTree = "<group>"; };
 		CC42FC1D210B07F500E80907 /* DashboardStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DashboardStoryboard.storyboard; sourceTree = "<group>"; };
 		CC42FC1F210B11DA00E80907 /* DashboardModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModule.swift; sourceTree = "<group>"; };
 		CC42FC21210B11ED00E80907 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -309,7 +313,9 @@
 		CC3CD3CC21A3EB1000C582D7 /* ApplicationServices */ = {
 			isa = PBXGroup;
 			children = (
-				CC3CD3CD21A3EB5100C582D7 /* ServiceParserTests.swift */,
+				CC3CD3D121A4510E00C582D7 /* MockPayUseCase.json */,
+				CC3CD3CD21A3EB5100C582D7 /* ApplicationServiceParserTests.swift */,
+				CC3CD3CF21A44E3A00C582D7 /* ApplicationServiceTests.swift */,
 			);
 			path = ApplicationServices;
 			sourceTree = "<group>";
@@ -568,6 +574,7 @@
 			files = (
 				CC42FC5F21185F6000E80907 /* BadJsonTopHighlights.json in Resources */,
 				CC42FC5721184DDA00E80907 /* BadJsonPayment.json in Resources */,
+				CC3CD3D221A4510E00C582D7 /* MockPayUseCase.json in Resources */,
 				CC42FC5521184D8D00E80907 /* Full3Payments.json in Resources */,
 				CC42FC6121185F9A00E80907 /* TypeMissingJsonTopHighlights.json in Resources */,
 				CC42FC5D21185F2900E80907 /* Full2TopHighlights.json in Resources */,
@@ -633,10 +640,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC3CD3D021A44E3A00C582D7 /* ApplicationServiceTests.swift in Sources */,
 				CC42FC642118695F00E80907 /* TopHighlightViewModelTests.swift in Sources */,
 				CC42FC6621186E9B00E80907 /* TopHighlightsSectionViewModelTests.swift in Sources */,
 				CC42FC5121184B8E00E80907 /* DashboardModuleTests.swift in Sources */,
-				CC3CD3CE21A3EB5100C582D7 /* ServiceParserTests.swift in Sources */,
+				CC3CD3CE21A3EB5100C582D7 /* ApplicationServiceParserTests.swift in Sources */,
 				CC42FC5B21185EC600E80907 /* TopHighlightTests.swift in Sources */,
 				CC42FC68211885E500E80907 /* DashboardPaymentViewModelTests.swift in Sources */,
 				3E5987852061879F0024F7F7 /* APIClientArchitectureDemoTests.swift in Sources */,

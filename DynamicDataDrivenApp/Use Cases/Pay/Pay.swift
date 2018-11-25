@@ -91,17 +91,6 @@ class Pay: ApplicationServiceType {
 
 extension Pay {
     
-    func valid() -> Bool {
-        
-        if service.count == 1,
-            let key = service.first?.key ,
-            key.prefix(2) == "@@" {
-            
-            return true
-        }
-        else { return false }
-    }
-    
     func getOpenParameters(_ params: [String : Any]) -> (module: String,
                                                          method: String,
                                                          parameters: [String: String],
@@ -149,13 +138,5 @@ extension Pay {
             
         }
     }
-    
-    func parse(array: [String: Any]) {
-        
-        let parameterKeys = array.keys.filter { $0.prefix(2) == "##" }
-        
-    }
-    
-    
 }
 

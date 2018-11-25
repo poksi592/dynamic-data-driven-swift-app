@@ -181,4 +181,185 @@ class ServiceParserTests: XCTestCase {
         XCTAssertEqual(result["##amount"] as! Int, 200)
     }
 
+    // MARK Testing functionality to extract from array only the dictionary statements, which match response parameters
+    func test_getStatementsWithResponsesOnly_noResponse() {
+        
+        // Prepare
+        let array = [
+            ["%%response":
+                ["paymentToken": "%%response.paymentToken"]
+            ]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.getStatementsWithResponsesOnly(from: array)
+        
+        // Test
+        XCTAssertEqual(result.count, 1)
+    }
+    
+    func test_getStatementsWithResponsesOnly_noResponseStatements() {
+        
+        // Prepare
+        let array = [
+            ["something-but-not-response":
+                ["paymentToken": "%%response.paymentToken"]
+            ]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.getStatementsWithResponsesOnly(from: array)
+        
+        // Test
+        XCTAssertEqual(result.count, 0)
+    }
+    
+    func test_getStatementsWithResponsesOnly_twoResponses() {
+        
+        // Prepare
+        let array = [
+            ["%%response.paymentToken":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ["%%response.somethingElse":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ["not-a-response.somethingElse":
+                ["paymentToken": "%%response.paymentToken"]
+            ]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.getStatementsWithResponsesOnly(from: array)
+        
+        // Test
+        XCTAssertEqual(result.count, 2)
+    }
+    
+    func test_getStatementsWithResponsesOnly_twoResponsesInOne() {
+        
+        // Prepare
+        let array = [
+            ["%%response.paymentToken,%%response.somethingElse":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ["%%response.somethingTotallyDifferent":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ["not-a-response.somethingElse":
+                ["paymentToken": "%%response.paymentToken"]
+            ]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.getStatementsWithResponsesOnly(from: array)
+        
+        // Test
+        XCTAssertEqual(result.count, 2)
+    }
+    
+    func test_getStatementsWithResponsesOnly_twoResponsesInOneOneValid () {
+        
+        // Prepare
+        let array = [
+            ["%%response.paymentToken,%%not-a-response.somethingElse":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ["%%response.somethingTotallyDifferent":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ["not-a-response.somethingElse":
+                ["paymentToken": "%%response.paymentToken"]
+            ]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.getStatementsWithResponsesOnly(from: array)
+        
+        // Test
+        XCTAssertEqual(result.count, 2)
+    }
+    
+    func test_getStatementsWithResponsesOnly_allResponsesInvalid () {
+        
+        // Prepare
+        let array = [
+            ["%%not-a-response.paymentToken,%%not-a-response.somethingElse":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ["%%not-a-response.somethingTotallyDifferent":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ["not-a-response.somethingElse":
+                ["paymentToken": "%%response.paymentToken"]
+            ]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.getStatementsWithResponsesOnly(from: array)
+        
+        // Test
+        XCTAssertEqual(result.count, 0)
+    }
+    
+    func test_getResponseMatchingStatements_allNonMatching() {
+        
+        // Prepare
+        let array = [
+            ["%%response.paymentToken,%%response.somethingElse":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ["%%response.somethingTotallyDifferent":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+        ]
+        let response: [String: Any]  = ["paymentToken": "1234", "amount": 100]
+        
+        // Execute
+        let result = ApplicationServiceParser.getResponseMatchingStatements(from: array, response: response)
+        
+        // Test
+        XCTAssertEqual(result?.count, 0)
+    }
+    
+    func test_getResponseMatchingStatements_oneMatching() {
+        
+        // Prepare
+        let array = [
+            ["%%response.paymentToken,%%response.somethingElse":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ["%%response.paymentToken":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ]
+        let response: [String: Any]  = ["paymentToken": "1234", "amount": 100]
+        
+        // Execute
+        let result = ApplicationServiceParser.getResponseMatchingStatements(from: array, response: response)
+        
+        // Test
+        XCTAssertEqual(result?.count, 1)
+    }
+    
+    func test_getResponseMatchingStatements_oneDoubleMatching() {
+        
+        // Prepare
+        let array = [
+            ["%%response.paymentToken,%%response.amount":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ["%%response.something-else":
+                ["paymentToken": "%%response.paymentToken"]
+            ],
+            ]
+        let response: [String: Any]  = ["paymentToken": "1234", "amount": 100]
+        
+        // Execute
+        let result = ApplicationServiceParser.getResponseMatchingStatements(from: array, response: response)
+        
+        // Test
+        XCTAssertEqual(result?.count, 1)
+    }
+
 }

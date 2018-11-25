@@ -28,4 +28,16 @@ extension Bundle {
             return urlSchemes.flatMap { $0 }
         }
     }
+    
+    func loadJson(filename: String) -> [String: Any]? {
+        
+        guard let filepath = self.path(forResource: filename, ofType: "json") else { return nil }
+        let url = URL(fileURLWithPath: filepath)
+        guard let data = try? Data(contentsOf: url),
+            let deserialised = try? JSONSerialization.jsonObject(with: data,
+                                                                 options: JSONSerialization.ReadingOptions.allowFragments),
+            let serviceDictionary = deserialised as? [String: Any] else { return nil }
+
+        return serviceDictionary
+    }
 }
