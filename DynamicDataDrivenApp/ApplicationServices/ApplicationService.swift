@@ -181,30 +181,64 @@ class ApplicationServiceParser {
         
         let matchingResponseStatements = responseStatements.filter { responseDict in
             
-            if responseDict["%%response"] != nil { return true }
-            
-            guard let responseComponents = responseDict.keys.first?.split(separator: ","),
-                responseStatements.count > 0 else { return false }
-            
-            let keysFromResponseComponents = responseComponents.map { (responseComponent) -> String? in
-                
-                let responseSeparatedComponents = responseComponent.split(separator: ".")
-                guard responseSeparatedComponents.count > 1,
-                    let key = responseSeparatedComponents.last else { return nil }
-                
-                return String(key)
-            }.compactMap { $0 }
-            
-            for key in keysFromResponseComponents {
-                
-                if response[key] == nil {
-                    return false
-                }
-            }
-            
-            return true
+            return ApplicationServiceParser.isStatementMatchingAnyResponse(from: responseDict,
+                                                                                response: response)
         }
         
         return matchingResponseStatements
     }
+    
+    class func isStatementMatchingAnyResponse(from array: [String: Any],
+                                              response: [String: Any]) -> Bool {
+        
+        if array["%%response"] != nil { return true }
+        
+        guard let responseComponents = array.keys.first?.split(separator: ",") else { return false }
+        
+        let keysFromResponseComponents = responseComponents.map { (responseComponent) -> String? in
+            
+            let responseSeparatedComponents = responseComponent.split(separator: ".")
+            guard responseSeparatedComponents.count > 1,
+                let key = responseSeparatedComponents.last else { return nil }
+            
+            return String(key)
+            }.compactMap { $0 }
+        
+        for key in keysFromResponseComponents {
+            
+            if response[key] == nil {
+                return false
+            }
+        }
+        return true
+    }
+    
+    
+    class func isStatementOfServiceParametersAssingments(from dictionary: [String: Any]) -> Bool {
+        
+        let serviceParametertStatements = dictionary.filter { $0.key.prefix(2) == "##" }
+        
+        return serviceParametertStatements.count == dictionary.count && dictionary.count != 0
+    }
+    
+    class func isStatementRecursedServiceCall(from dictionary: [String: Any]) -> Bool {
+        
+        return false
+    }
+    
+    class func isStatementOpenModule(from dictionary: [String: Any]) -> Bool {
+        
+        return false
+    }
+    
+    class func isStatementError(from dictionary: [String: Any]) -> Bool {
+        
+        return false
+    }
+    
+    class func isStatementErrorResponse(from dictionary: [String: Any]) -> Bool {
+        
+        return false
+    }
 }
+

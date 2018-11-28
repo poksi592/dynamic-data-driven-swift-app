@@ -361,5 +361,58 @@ class ServiceParserTests: XCTestCase {
         // Test
         XCTAssertEqual(result?.count, 1)
     }
+    
+    // MARK: Checking type of collection against expected types
+ 
+    func test_isStatementOfServiceParametersAssingments_noParameters() {
+        
+        // Prepare
+        let statements = [String: Any]()
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementOfServiceParametersAssingments(from: statements)
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementOfServiceParametersAssingments_wrongParameters() {
+        
+        // Prepare
+        let statements = ["paymentToken": "%%response.paymentToken",
+                          "amount": "%%response.amount"]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementOfServiceParametersAssingments(from: statements)
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementOfServiceParametersAssingments_oneWrongParameters() {
+        
+        // Prepare
+        let statements = ["##paymentToken": "%%response.paymentToken",
+                          "amount": "%%response.amount"]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementOfServiceParametersAssingments(from: statements)
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementOfServiceParametersAssingments_allRightParameters() {
+        
+        // Prepare
+        let statements = ["##paymentToken": "%%response.paymentToken",
+                          "##amount": "%%response.amount"]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementOfServiceParametersAssingments(from: statements)
+        
+        // Test
+        XCTAssertTrue(result)
+    }
 
 }
