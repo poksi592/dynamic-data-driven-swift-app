@@ -33,11 +33,13 @@ public enum ResponseError: Error {
     case serverError500(error: Error?)
     case other
     
-    init?(error: Error?, response: HTTPURLResponse?) {
+    init?(error: Error?, response: HTTPURLResponse?, code: Int? = nil) {
         
         let responseCode: Int
         if let response = response {
             responseCode = response.statusCode
+        } else if let code = code {
+            responseCode = code
         } else {
             responseCode = 0
             self = .other

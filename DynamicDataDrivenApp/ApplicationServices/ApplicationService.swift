@@ -221,24 +221,40 @@ class ApplicationServiceParser {
         return serviceParametertStatements.count == dictionary.count && dictionary.count != 0
     }
     
-    class func isStatementRecursedServiceCall(from dictionary: [String: Any]) -> Bool {
+    class func isStatementRecursedServiceCall(from dictionary: [String: Any],
+                                              serviceName: String) -> Bool {
         
-        return false
+        guard dictionary.count == 1 else { return false }
+        return dictionary.keys.first == serviceName
     }
     
     class func isStatementOpenModule(from dictionary: [String: Any]) -> Bool {
         
-        return false
+        guard dictionary.count == 1,
+            let openParameters = dictionary["%%open"] as? [String: Any],
+            openParameters.count > 2 && openParameters.count <= 4,
+            let _ = openParameters["%%module"],
+            let _ = openParameters["%%method"],
+            let _ = openParameters["%%callback"] else { return false }
+        
+        if let parameters = openParameters["%%parameters"] as? [String: Any],
+            parameters.count == 0 {
+            
+            return false
+        }
+
+        return true
     }
     
     class func isStatementError(from dictionary: [String: Any]) -> Bool {
         
-        return false
-    }
-    
-    class func isStatementErrorResponse(from dictionary: [String: Any]) -> Bool {
-        
-        return false
+        if dictionary.count == 1,
+            let _ = dictionary["%%error"] as? [String: Any] {
+            
+            return true
+        } else {
+            return false
+        }
     }
 }
 

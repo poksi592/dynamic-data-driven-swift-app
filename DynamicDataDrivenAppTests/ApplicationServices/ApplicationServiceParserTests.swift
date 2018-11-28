@@ -414,5 +414,218 @@ class ServiceParserTests: XCTestCase {
         // Test
         XCTAssertTrue(result)
     }
-
+    
+    func test_isStatementRecursedServiceCall_wrongService() {
+        
+        // Prepare
+        let statements = ["@@pay":
+                            ["##paymentToken": "%%response.paymentToken"]
+                        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementRecursedServiceCall(from: statements, serviceName: "@@not-pay")
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementRecursedServiceCall_matchService() {
+        
+        // Prepare
+        let statements = ["@@pay":
+            ["##paymentToken": "%%response.paymentToken"]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementRecursedServiceCall(from: statements, serviceName: "@@pay")
+        
+        // Test
+        XCTAssertTrue(result)
+    }
+    
+    func test_isStatementRecursedServiceCall_emptyService() {
+        
+        // Prepare
+        let statements = ["@@pay":
+            ["##paymentToken": "%%response.paymentToken"]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementRecursedServiceCall(from: statements, serviceName: "")
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementOpenModule_emptyService() {
+        
+        // Prepare
+        let statements = [String: Any]()
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementOpenModule(from: statements)
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementOpenModule_moreThanOneParameter() {
+        
+        // Prepare
+        let statements =
+            ["%%open":
+                ["%%module": "module-name",
+                 "%%method": "module-name",
+                 "%%callback": ["paymentToken": "%%response.paymentToken"
+                ]
+            ],
+            "%%another-parameter":
+                ["paymentToken": "%%response.paymentToken"]
+            ]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementOpenModule(from: statements)
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementOpenModule_validOpen() {
+        
+        // Prepare
+        let statements =
+            ["%%open":
+                ["%%module": "module-name",
+                 "%%method": "module-name",
+                 "%%callback": ["paymentToken", "%%response.paymentToken"
+                    ]
+                ]
+            ]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementOpenModule(from: statements)
+        
+        // Test
+        XCTAssertTrue(result)
+    }
+    
+    func test_isStatementOpenModule_nonValidOpen() {
+        
+        // Prepare
+        let statements =
+            ["%%no-open":
+                ["%%module": "module-name",
+                 "%%method": "module-name",
+                 "%%callback": ["paymentToken", "%%response.paymentToken"
+                    ]
+                ]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementOpenModule(from: statements)
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementOpenModule_callbackParametersMissing() {
+        
+        // Prepare
+        let statements =
+            ["%%open":
+                ["%%module": "module-name",
+                 "%%method": "module-name"
+                ]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementOpenModule(from: statements)
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementOpenModule_allParameters() {
+        
+        // Prepare
+        let statements =
+            ["%%open":
+                ["%%module": "module-name",
+                 "%%method": "module-name",
+                 "%%callback": ["paymentToken","%%response.paymentToken"],
+                 "%%parameters": ["paymentToken": "%%response.paymentToken"]
+                ]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementOpenModule(from: statements)
+        
+        // Test
+        XCTAssertTrue(result)
+    }
+    
+    func test_isStatementError_noStatements() {
+        
+        // Prepare
+        let statements = [String: Any]()
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementError(from: statements)
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementError_moreThanOneParameter() {
+        
+        // Prepare
+        let statements =
+            ["%%error":
+                ["%%module": "module-name",
+                 "%%method": "module-name",
+                 "%%callback": ["paymentToken": "%%response.paymentToken"
+                    ]
+                ],
+             "%%another-parameter":
+                ["paymentToken": "%%response.paymentToken"]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementError(from: statements)
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementError_notDictionaryButArray() {
+        
+        // Prepare
+        let statements = [
+                            "%%error":
+                                ["401", "500"]
+                         ]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementError(from: statements)
+        
+        // Test
+        XCTAssertFalse(result)
+    }
+    
+    func test_isStatementError_valis() {
+        
+        // Prepare
+        let statements = [
+            "%%error":
+                ["401,500":  ["paymentToken": "%%response.paymentToken"],
+                 "403":  ["paymentToken": "%%response.paymentToken"]
+                ]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.isStatementError(from: statements)
+        
+        // Test
+        XCTAssertTrue(result)
+    }
 }
