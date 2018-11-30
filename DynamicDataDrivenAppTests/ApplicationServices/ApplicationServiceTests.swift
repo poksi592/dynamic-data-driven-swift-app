@@ -221,6 +221,16 @@ class ApplicationServiceTests: XCTestCase {
         XCTAssertEqual(mockPayUseCase.serviceParameters["##amount"] as! Int, 200)
     }
     
+    // MARK: Running the service
+    
+    func test_run() {
+
+        mockPayUseCase.run()
+        
+    }
+    
+    
+    
 }
 
 class MockPayUseCase: ApplicationServiceType {
@@ -243,7 +253,4 @@ class MockPayUseCase: ApplicationServiceType {
         return true
     }
     
-    func run() {
-        
-    }
 }

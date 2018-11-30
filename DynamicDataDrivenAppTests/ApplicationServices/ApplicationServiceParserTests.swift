@@ -628,4 +628,101 @@ class ServiceParserTests: XCTestCase {
         // Test
         XCTAssertTrue(result)
     }
+    
+    // MARK: getUrl tests
+    
+    func test_getUrl_noStatements() {
+        
+        // Prepare
+        let statements = [String: Any]()
+        
+        // Execute
+        let result = ApplicationServiceParser.getUrl(from: statements, schema: "yourbank")
+        
+        // Test
+        XCTAssertNil(result)
+    }
+    
+    func test_getUrl_validStatements() {
+        
+        // Prepare
+        let statements: [String : Any] = ["%%open":
+                                            ["%%module": "payments",
+                                            "%%method": "/pay",
+                                            "%%parameters": [
+                                                "amount": "##amount",
+                                                "token": "##paymentToken",
+                                                "presentationMode": "navigationStack",
+                                                "viewController": "PaymentsViewControllerId"
+                                            ],
+                                            "%%callback": [:]]
+                                          ]
+        
+        // Execute
+        let result = ApplicationServiceParser.getUrl(from: statements, schema: "yourbank")
+        
+        // Test
+        XCTAssertNotNil(result)
+    }
+    
+    func test_getUrl_validStatements_noSchema() {
+        
+        // Prepare
+        let statements: [String : Any] = ["%%open":
+            ["%%module": "payments",
+             "%%method": "/pay",
+             "%%parameters": [
+                "amount": "##amount",
+                "token": "##paymentToken",
+                "presentationMode": "navigationStack",
+                "viewController": "PaymentsViewControllerId"
+                ],
+            "%%callback": [:]]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.getUrl(from: statements, schema: "")
+        
+        // Test
+        XCTAssertNil(result)
+    }
+    
+    func test_getUrl_noOpen() {
+        
+        // Prepare
+        let statements: [String : Any] = ["%%no-open":
+            ["%%module": "payments",
+             "%%method": "/pay",
+             "%%parameters": [
+                "amount": "##amount",
+                "token": "##paymentToken",
+                "presentationMode": "navigationStack",
+                "viewController": "PaymentsViewControllerId"
+                ],
+             "%%callback": [:]]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.getUrl(from: statements, schema: "yourbank")
+        
+        // Test
+        XCTAssertNil(result)
+    }
+    
+    func test_getUrl_noParameters() {
+        
+        // Prepare
+        let statements: [String : Any] = ["%%open":
+            ["%%module": "payments",
+             "%%method": "/pay",
+             "%%callback": [:]]
+        ]
+        
+        // Execute
+        let result = ApplicationServiceParser.getUrl(from: statements, schema: "yourbank")
+        
+        // Test
+        XCTAssertNotNil(result)
+    }
 }
+

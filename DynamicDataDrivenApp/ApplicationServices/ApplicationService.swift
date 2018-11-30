@@ -43,9 +43,10 @@ extension ApplicationServiceType {
     
     func valid() -> Bool {
         
-        if service.count == 1,
-            let key = service.first?.key ,
-            key.prefix(2) == "@@" {
+        if service.count == 2,
+            service.keys.contains("%%serviceParameters"),
+            let serviceName = self.serviceName,
+            let _ = service[serviceName] {
             
             return true
         }
@@ -79,6 +80,37 @@ extension ApplicationServiceType {
                                                                                          response: response)
         service()
     }
+    
+    
+    func run() {
+        
+        guard let name = self.serviceName,
+            let statementsArray = service[name] as? [Any] else { return }
+        
+        statementsArray.forEach { statement in
+            
+            print("mmm")
+        }
+    }
+    
+    func execute(statements: [[String: Any]]) {
+        
+        
+    }
+    
+    func executeOpen(statement: [String: Any]) -> () -> Void {
+        
+        guard ApplicationServiceParser.isStatementOpenModule(from: statement) else { return { } }
+        
+        
+        
+        return { }
+    }
+    
+    
+    
+    
+    
     
     // Executes the elements within any array, which is representewd by a value of the dictionary with the key that starts with "%%response"
     // Every dictionary can have only one element
@@ -255,6 +287,21 @@ class ApplicationServiceParser {
         } else {
             return false
         }
+    }
+    
+    class func getUrl(from openStatement: [String: Any], schema: String) -> URL? {
+        
+        if ApplicationServiceParser.isStatementOpenModule(from: openStatement),
+            let statement = openStatement["%%open"] as? [String: Any],
+            let host = statement["%%module"] as? String,
+            let path = statement["%%method"] as? String {
+            
+            return URL(schema: schema,
+                       host: host,
+                       path: path,
+                       parameters: statement["%%parameters"] as? [String: String])
+        }
+        return nil
     }
 }
 

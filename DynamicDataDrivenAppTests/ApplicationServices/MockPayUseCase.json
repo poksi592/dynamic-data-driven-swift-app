@@ -1,90 +1,51 @@
 {
-  "%%serviceParameters": [
-    "##amount",
-    "##paymentToken",
-    "docs: with the '##' prefix we define the keys of properties for the service, which have to be defined",
-    "docs: by the caller of the service before the execution is started."
-  ],
-  "@@pay": {
-    "docs": [
-      "docs: prefix '@@' defines the name of the service/use case, which is defined by user.",
-      "docs: there can be only one such service defined in one file."
+    "%%serviceParameters": [
+        "##amount",
+        "##paymentToken"
     ],
-    "%%execute": [
-      {
-        "docs": [
-          "docs: '%%' prefix always define a reserved word, like in programming language.",
-          "docs: 'execute' contains array of consequent dictionaries which contain execution steps."
-        ],
-      },
-      {
-        "%%open": {
-          "docs": [
-            "docs: 'open' is reserved keyword and means opening the module",
-            "docs: it requires parameters 'module', 'method' and 'callback', 'parameters' are optional."
-          ],
-          "%%module": "payments",
-          "%%method": "/pay",
-          "%%parameters": {
-            "docs": [
-              "docs: 'parameters' can get assigned fixed values or any value from 'service-parameters'."
-            ],
-            "amount": "##amount",
-            "token": "##paymentToken",
-            "presentationMode": "navigationStack",
-            "viewController": "PaymentsViewControllerId"
-          },
-          "%%callback": [
-            {
-              "docs": [
-                "docs: 'callback' is similar as 'execute', contains array of consequent dictionaries which contain execution steps.",
-                "docs: It is called when module finishes its execution."
-              ],
-            },
-            {
-              "%%error": {
-                "docs": [
-                  "docs: 'error' is another reserved keyword, which again, contains dictionary of optional steps.",
-                  "docs: it will be executed only if there is an error in the callback.",
-                  "docs: every step's key should match the error state. There is predefined list of states."
-                ],
-                "unauthorized401,serverError500": [
-                  "docs: More possible responses can be split by comma.",
-                  {
-                    "%%open": {
-                      "%%module": "login",
-                      "%%method": "/payment-token",
-                      "%%parameters": {
-                        "amount": "##amount",
-                        "token": "##paymentToken",
-                        "presentationMode": "modal",
-                        "viewController": "LoginViewControllerId"
-                      },
-                      "%%callback": [
-                        {
-                          "%%response.paymentToken": [
-                            "docs: key with reserved keyword and its property means checking if it has a value.",
-                            {
-                              "@@pay": {
-                                "docs": [
-                                  "docs: if there is a @@ key and does not contain the key 'execute', then it means",
-                                  "docs: this is a call to existing @@ service",
-                                  "docs: '##' properties can get values assigned from responses."
-                                ],
-                                "##paymentToken": "%%response.paymentToken"
-                              }
-                            }
-                          ]
+    "@@pay": [
+        {
+            "%%open": {
+                "%%module": "payments",
+                "%%method": "/pay",
+                "%%parameters": {
+                    "amount": "##amount",
+                    "token": "##paymentToken",
+                    "presentationMode": "navigationStack",
+                    "viewController": "PaymentsViewControllerId"
+                },
+                "%%callback": [
+                    {
+                        "%%error": {
+                            "401,500": [
+                                {
+                                    "%%open": {
+                                        "%%module": "login",
+                                        "%%method": "/payment-token",
+                                        "%%parameters": {
+                                            "amount": "##amount",
+                                            "token": "##paymentToken",
+                                            "presentationMode": "modal",
+                                            "viewController": "LoginViewControllerId"
+                                        },
+                                        "%%callback": [
+                                            {
+                                                "%%response.paymentToken": [
+                                                    {
+                                                        "@@pay": {
+                                                            "##paymentToken": "%%response.paymentToken"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
                         }
-                      ]
                     }
-                  }
                 ]
-              }
             }
-          ]
         }
-      }
     ]
-  }
 }

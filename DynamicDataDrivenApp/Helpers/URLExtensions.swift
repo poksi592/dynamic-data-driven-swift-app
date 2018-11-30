@@ -15,6 +15,7 @@ extension URL {
           path: String? = nil,
           parameters: [String: String]? = nil) {
         
+        guard schema.count > 0 else { return nil }
         var components = URLComponents()
         components.scheme = schema
         components.host = host
