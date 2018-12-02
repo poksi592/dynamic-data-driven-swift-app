@@ -93,19 +93,38 @@ extension ApplicationServiceType {
         }
     }
     
-    func execute(statements: [[String: Any]]) {
+    func execute(statements: [[String: Any]], response: [String: Any]? = nil, errorCode: Int? = nil) {
         
         
     }
     
-    func executeOpen(statement: [String: Any]) -> () -> Void {
+    func executeOpen(statement: [String: Any]) {
         
-        guard ApplicationServiceParser.isStatementOpenModule(from: statement) else { return { } }
+        guard ApplicationServiceParser.isStatementOpenModule(from: statement),
+            let url = ApplicationServiceParser.getUrl(from: statement, schema: scheme),
+            let callback = statement["%%callback"] as? [[String: Any]] else { return }
         
-        
-        
-        return { }
+        appRouter.open(url: url) { (response, data, urlResponse, error) in
+            
+            self.execute(statements: callback, response: response, errorCode: error?.errorCode)
+        }
+        return
     }
+    
+    func executeError(statement: [String: Any], errorCode: Int?) {
+        
+        guard ApplicationServiceParser.isStatementError(from: statement) else { return }
+        
+        
+        return
+    }
+    
+    func executeResponse(statement: [String: Any]) -> [[String: Any]]? {
+        
+        return nil
+    }
+    
+    
     
     
     
@@ -289,6 +308,8 @@ class ApplicationServiceParser {
         }
     }
     
+    // MARK:
+    
     class func getUrl(from openStatement: [String: Any], schema: String) -> URL? {
         
         if ApplicationServiceParser.isStatementOpenModule(from: openStatement),
@@ -303,5 +324,22 @@ class ApplicationServiceParser {
         }
         return nil
     }
+    
+    class func getErrorMatchingStatements(from errorStatement: [String: Any], errorCode: Int) -> [[String: Any]]? {
+        
+        for errorDict in errorStatement {
+            
+            let errors = errorDict.key.split(separator: ",")
+            let errorNumbers = errors.map { Int($0) }
+            
+            if errorNumbers.contains(errorCode) {
+                
+                return errorStatement[errorDict.key] as? [[String: Any]]
+            }
+        }
+       
+        return nil
+    }
+
 }
 

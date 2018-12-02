@@ -724,5 +724,79 @@ class ServiceParserTests: XCTestCase {
         // Test
         XCTAssertNotNil(result)
     }
+    
+    // MARK: getErrorMatchingStatements getting statements if error matches a parameter
+    
+    func test_getErrorMatchingStatements_noErrorStatement() {
+        
+        // Prepare
+        let statements: [String : Any] = ["not-an-error": [:]]
+        let errorCode = 400
+        
+        // Execute
+        let result = ApplicationServiceParser.getErrorMatchingStatements(from: statements, errorCode: errorCode)
+        
+        // Test
+        XCTAssertNil(result)
+        
+    }
+    
+    func test_getErrorMatchingStatements_noMatchingErrorCode() {
+        
+        // Prepare
+        let statements: [String : Any] = ["401": [:]]
+        let errorCode = 400
+        
+        // Execute
+        let result = ApplicationServiceParser.getErrorMatchingStatements(from: statements, errorCode: errorCode)
+        
+        // Test
+        XCTAssertNil(result)
+        
+    }
+    
+    func test_getErrorMatchingStatements_noMatchingStatementType() {
+        
+        // Prepare
+        let statements: [String : Any] = ["400": ["something": "should-be-array"]]
+        let errorCode = 400
+        
+        // Execute
+        let result = ApplicationServiceParser.getErrorMatchingStatements(from: statements, errorCode: errorCode)
+        
+        // Test
+        XCTAssertNil(result)
+        
+    }
+    
+    func test_getErrorMatchingStatements_singleMatchingStatement() {
+        
+        // Prepare
+        let statements: [String : Any] = ["400": [["something": "should-be-array"]]]
+        let errorCode = 400
+        
+        // Execute
+        let result = ApplicationServiceParser.getErrorMatchingStatements(from: statements, errorCode: errorCode)
+        
+        // Test
+        XCTAssertNotNil(result)
+        
+    }
+    
+    func test_getErrorMatchingStatements_twoMatchingStatement_onlyFirstTaken() {
+        
+        // Prepare
+        let statements: [String : Any] = ["400": [["something400": "should-be-array"]],
+                                          "401": [["something4001": "should-be-array"]]]
+        let errorCode = 400
+        
+        // Execute
+        let result = ApplicationServiceParser.getErrorMatchingStatements(from: statements, errorCode: errorCode)
+        
+        // Test
+        XCTAssertNotNil(result)
+        XCTAssertEqual(result?.count, 1)
+        XCTAssertEqual(result?.first?.keys.first, "something400")
+    }
 }
 

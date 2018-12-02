@@ -33,6 +33,29 @@ public enum ResponseError: Error {
     case serverError500(error: Error?)
     case other
     
+    var errorCode: Int? {
+        
+        get {
+            
+            switch self {
+            case .badRequest400:
+                return 400
+            case .unauthorized401:
+                return 401
+            case .forbidden403:
+                return 403
+            case .notFound404:
+                return 404
+            case .other400:
+                return 405
+            case .serverError500:
+                return 500
+            default:
+                return nil
+            }
+        }
+    }
+    
     init?(error: Error?, response: HTTPURLResponse?, code: Int? = nil) {
         
         let responseCode: Int
