@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class PaymentsPresenter: ModuleRoutable, ModulePresentable {
     
@@ -22,18 +23,36 @@ class PaymentsPresenter: ModuleRoutable, ModulePresentable {
     }
     
     static func getPaths() -> [String] {
-        return ["/pay"]
+        return ["/pay",
+                "/refund",
+                "/refund-alert-only"]
     }
     
     func route(parameters: ModuleParameters?, path: String?, callback: ModuleCallback?) {
         
+        guard let path = path else { return }
         self.parameters = parameters
         self.callback = callback
         
-        wireframe.presentViewController(ofType: PaymentsViewController.self,
-                                        presenter: self,
-                                        parameters: parameters)
+        switch path {
+        case "/refund":
+            wireframe.presentViewController(ofType: RefundSentViewController.self,
+                                            presenter: self,
+                                            parameters: parameters)
+        case "/refund-alert-only":
+            let alertMessage = UIAlertController(title: "Refund Request sent!",
+                                                 message: nil,
+                                                 preferredStyle: .alert)
+            alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            wireframe.presentationMode = .modal
+            wireframe.present(viewController: alertMessage)
+        default:
+            wireframe.presentViewController(ofType: PaymentsViewController.self,
+                                            presenter: self,
+                                            parameters: parameters)
+        }
     }
+    
     
     func pay(amount: String?) {
         

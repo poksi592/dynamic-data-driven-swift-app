@@ -82,6 +82,8 @@
 		CC90031F21B5CF5C0066E770 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90031A21B5CF5C0066E770 /* LoginInteractor.swift */; };
 		CC90032021B5CF5C0066E770 /* LoginModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90031B21B5CF5C0066E770 /* LoginModule.swift */; };
 		CC90032221B5D28A0066E770 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC90032121B5D28A0066E770 /* LoginStoryboard.storyboard */; };
+		CC90032421B5E20A0066E770 /* RefundSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90032321B5E20A0066E770 /* RefundSentViewController.swift */; };
+		CC90032821B5EA8B0066E770 /* Dashboard2.json in Resources */ = {isa = PBXBuildFile; fileRef = CC90032721B5EA8B0066E770 /* Dashboard2.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +185,8 @@
 		CC90031A21B5CF5C0066E770 /* LoginInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		CC90031B21B5CF5C0066E770 /* LoginModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModule.swift; sourceTree = "<group>"; };
 		CC90032121B5D28A0066E770 /* LoginStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginStoryboard.storyboard; sourceTree = "<group>"; };
+		CC90032321B5E20A0066E770 /* RefundSentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefundSentViewController.swift; sourceTree = "<group>"; };
+		CC90032721B5EA8B0066E770 /* Dashboard2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Dashboard2.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +232,7 @@
 				CC281D8A20E284D700CE2673 /* PaymentsInteractor.swift */,
 				CC281D9220E524C300CE2673 /* PaymentsPresenter.swift */,
 				CC281D9E20E6428400CE2673 /* PaymentsWireframe.swift */,
+				CC90032321B5E20A0066E770 /* RefundSentViewController.swift */,
 			);
 			path = Payments;
 			sourceTree = "<group>";
@@ -457,6 +462,7 @@
 			children = (
 				CC90031221B5A2910066E770 /* Dashboard.swift */,
 				CC90031421B5A2B20066E770 /* Dashboard.json */,
+				CC90032721B5EA8B0066E770 /* Dashboard2.json */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -590,6 +596,7 @@
 				CC42FC3C2110546400E80907 /* DashboardMedia.xcassets in Resources */,
 				CC42FC36210F56F100E80907 /* TopHighlightView.xib in Resources */,
 				CC90031521B5A2B20066E770 /* Dashboard.json in Resources */,
+				CC90032821B5EA8B0066E770 /* Dashboard2.json in Resources */,
 				CC90032221B5D28A0066E770 /* LoginStoryboard.storyboard in Resources */,
 				3E3FE57D20B433AB000C3783 /* PaymentsStoryboard.storyboard in Resources */,
 				CC42FC30210B5E8800E80907 /* Payments.json in Resources */,
@@ -662,6 +669,7 @@
 				3E5987702061879F0024F7F7 /* AppDelegate.swift in Sources */,
 				CC42FC4221108EC800E80907 /* UIViewExtensions.swift in Sources */,
 				CC281D9F20E6428400CE2673 /* PaymentsWireframe.swift in Sources */,
+				CC90032421B5E20A0066E770 /* RefundSentViewController.swift in Sources */,
 				CC42FC34210F1CA300E80907 /* TopHighlight.swift in Sources */,
 				CC63FA4F2196F079009DC43E /* Pay.swift in Sources */,
 				3E6F83E52068C5D3004AF262 /* PaymentsModule.swift in Sources */,

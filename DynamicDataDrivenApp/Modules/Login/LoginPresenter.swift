@@ -46,5 +46,4 @@ class LoginPresenter: ModuleRoutable {
             self?.callback?(response, nil, urlResponse, error)
         }
     }
-    
 }

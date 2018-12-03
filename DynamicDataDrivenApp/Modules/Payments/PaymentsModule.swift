@@ -24,6 +24,7 @@ class PaymentModule: ModuleType {
         return ["/pay",
                 "/cancel-payment",
                 "/refund",
+                "/refund-alert-only",
                 "/last-10-payments"]
     }()
     
