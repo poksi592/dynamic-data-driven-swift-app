@@ -13,7 +13,7 @@ import Foundation
  It's based on execution steps from JSON file, which is passed by initialisation.
  */
 
-protocol ApplicationServiceType {
+protocol ApplicationServiceType: class {
     
     var serviceParameters: [String: Any] {get set}
     var service: [String: Any] {get set}
@@ -27,7 +27,7 @@ protocol ApplicationServiceType {
     func valid() -> Bool
     func run()
     
-    mutating func callServiceRecursively(from array: [[String: Any]],
+    func callServiceRecursively(from array: [[String: Any]],
                                          response: [String: Any],
                                          service: () -> ()) 
 }
@@ -68,7 +68,7 @@ extension ApplicationServiceType {
     }
     
     // Calls the service recursivelly again, if it finds it as dictionary in array passed.
-    mutating func callServiceRecursively(from array: [[String: Any]],
+    func callServiceRecursively(from array: [[String: Any]],
                                          response: [String: Any],
                                          service: () -> ()) {
         
@@ -85,15 +85,27 @@ extension ApplicationServiceType {
     func run() {
         
         guard let name = self.serviceName,
-            let statementsArray = service[name] as? [Any] else { return }
+            let statementsArray = service[name] as?  [[String: Any]] else { return }
         
-        statementsArray.forEach { statement in
-            
-            print("mmm")
-        }
+        execute(statements: statementsArray)
     }
     
-    func execute(statements: [[String: Any]], response: [String: Any]? = nil, errorCode: Int? = nil) {
+    func execute(statements: [[String: Any]],
+                 response: [String: Any]? = nil,
+                 errorCode: Int? = nil) {
+        
+        statements.forEach { statement in
+
+            if let errorCode = errorCode {
+                executeError(statement: statement, errorCode: errorCode)
+            }
+            if let response = response {
+                executeResponse(statement: statement, response: response)
+                executeServiceParametersAssingments(statement: statement, response: response)
+            }
+            
+            executeOpen(statement: statement)
+        }
         
         
     }
@@ -111,20 +123,55 @@ extension ApplicationServiceType {
         return
     }
     
-    func executeError(statement: [String: Any], errorCode: Int?) {
+    func executeError(statement: [String: Any], errorCode: Int) {
         
-        guard ApplicationServiceParser.isStatementError(from: statement) else { return }
+        guard ApplicationServiceParser.isStatementError(from: statement),
+            let statements = statement["%%error"] as? [String: Any],
+            let errorMatchedStatements = ApplicationServiceParser.getErrorMatchingStatements(from: statements,
+                                                                                             errorCode: errorCode) else { return }
         
+        self.execute(statements: errorMatchedStatements,
+                     response: nil,
+                     errorCode: errorCode)
         
         return
     }
     
-    func executeResponse(statement: [String: Any]) -> [[String: Any]]? {
+    func executeResponse(statement: [String: Any], response: [String: Any]) {
         
-        return nil
+        guard ApplicationServiceParser.isStatementMatchingAnyResponse(from: statement,
+                                                                      response: response),
+            let statements = statement.first?.value as? [[String: Any]]  else { return }
+        
+        self.execute(statements: statements,
+                     response: response,
+                     errorCode: nil)
     }
     
+    func executeServiceParametersAssingments(statement: [String: Any], response: [String: Any]) {
+        
+        guard ApplicationServiceParser.isStatementOfServiceParametersAssingments(from: statement) else { return }
+        
+        serviceParameters = ApplicationServiceParser.getResponseUpdatedServiceParameters(from: statement,
+                                                                                         serviceParameters: serviceParameters,
+                                                                                         response: response)
+        
+    }
     
+    func executeServiceRecursively(statement: [String: Any], response: [String: Any]) {
+        
+        guard let serviceName = serviceName,
+            ApplicationServiceParser.isStatementRecursedServiceCall(from: statement, serviceName: serviceName) == true  else { return }
+        
+        if let serviceParameterAssingments = statement.first?.value as? [String: Any] {
+            
+            self.executeServiceParametersAssingments(statement: serviceParameterAssingments, response: response)
+        }
+        
+        run()
+    }
+        
+
     
     
     
@@ -140,7 +187,7 @@ extension ApplicationServiceType {
     }
     
     // Assign the values to "##..." service parameters
-    mutating func assignValuesToServiceParameters(from array: [[String: Any]],
+    func assignValuesToServiceParameters(from array: [[String: Any]],
                                          response: [String: Any]) {
         
         let statementsWithResponsesOnly = ApplicationServiceParser.getStatementsWithResponsesOnly(from: array)
