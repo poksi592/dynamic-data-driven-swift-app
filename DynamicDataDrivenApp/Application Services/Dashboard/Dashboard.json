@@ -1,0 +1,17 @@
+{
+    "%%serviceParameters": [
+    ],
+    "@@showDashboard": [
+        {
+            "%%open": {
+                "%%module": "dashboard",
+                "%%method": "/present",
+                "%%parameters": {
+                    "presentationMode": "navigationStack",
+                    "viewController": "DashboardViewControllerId"
+                },
+                "%%callback": []
+            }
+        }
+    ]
+}

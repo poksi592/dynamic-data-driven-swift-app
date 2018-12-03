@@ -73,8 +73,9 @@
 		CC42FCAF2121D88400E80907 /* DashboardEventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42FCAE2121D88400E80907 /* DashboardEventEmitter.swift */; };
 		CC63FA4F2196F079009DC43E /* Pay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC63FA4E2196F079009DC43E /* Pay.swift */; };
 		CC63FA5121981B0F009DC43E /* Pay.json in Resources */ = {isa = PBXBuildFile; fileRef = CC63FA5021981B0F009DC43E /* Pay.json */; };
-		CC63FA5321981EA5009DC43E /* ApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC63FA5221981EA5009DC43E /* ApplicationService.swift */; };
 		CC858FC7213535B10047BE28 /* DashboardAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC858FC6213535B10047BE28 /* DashboardAnalytics.swift */; };
+		CC90031321B5A2910066E770 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90031221B5A2910066E770 /* Dashboard.swift */; };
+		CC90031521B5A2B20066E770 /* Dashboard.json in Resources */ = {isa = PBXBuildFile; fileRef = CC90031421B5A2B20066E770 /* Dashboard.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,8 +168,9 @@
 		CC42FCAE2121D88400E80907 /* DashboardEventEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardEventEmitter.swift; sourceTree = "<group>"; };
 		CC63FA4E2196F079009DC43E /* Pay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pay.swift; sourceTree = "<group>"; };
 		CC63FA5021981B0F009DC43E /* Pay.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Pay.json; sourceTree = "<group>"; };
-		CC63FA5221981EA5009DC43E /* ApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationService.swift; sourceTree = "<group>"; };
 		CC858FC6213535B10047BE28 /* DashboardAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardAnalytics.swift; sourceTree = "<group>"; };
+		CC90031221B5A2910066E770 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
+		CC90031421B5A2B20066E770 /* Dashboard.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Dashboard.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,9 +246,8 @@
 				3E3FE54120B36435000C3783 /* Storyboards */,
 				3E6F83DF20657527004AF262 /* Helpers */,
 				3E5987A620618A290024F7F7 /* Modules */,
-				CC63FA4B2196EF56009DC43E /* Use Cases */,
+				CC63FA4B2196EF56009DC43E /* Application Services */,
 				3E5987A3206188700024F7F7 /* Routing */,
-				CC63FA4C2196EF89009DC43E /* ApplicationServices */,
 				3E59876F2061879F0024F7F7 /* AppDelegate.swift */,
 				3E5987712061879F0024F7F7 /* ViewController.swift */,
 				3E5987732061879F0024F7F7 /* Main.storyboard */,
@@ -419,20 +420,13 @@
 			path = Events;
 			sourceTree = "<group>";
 		};
-		CC63FA4B2196EF56009DC43E /* Use Cases */ = {
+		CC63FA4B2196EF56009DC43E /* Application Services */ = {
 			isa = PBXGroup;
 			children = (
+				CC90031121B5A1C80066E770 /* Dashboard */,
 				CC63FA4D2196F001009DC43E /* Pay */,
 			);
-			path = "Use Cases";
-			sourceTree = "<group>";
-		};
-		CC63FA4C2196EF89009DC43E /* ApplicationServices */ = {
-			isa = PBXGroup;
-			children = (
-				CC63FA5221981EA5009DC43E /* ApplicationService.swift */,
-			);
-			path = ApplicationServices;
+			path = "Application Services";
 			sourceTree = "<group>";
 		};
 		CC63FA4D2196F001009DC43E /* Pay */ = {
@@ -442,6 +436,15 @@
 				CC63FA5021981B0F009DC43E /* Pay.json */,
 			);
 			path = Pay;
+			sourceTree = "<group>";
+		};
+		CC90031121B5A1C80066E770 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				CC90031221B5A2910066E770 /* Dashboard.swift */,
+				CC90031421B5A2B20066E770 /* Dashboard.json */,
+			);
+			path = Dashboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -560,6 +563,7 @@
 				3E5987772061879F0024F7F7 /* Assets.xcassets in Resources */,
 				CC42FC3C2110546400E80907 /* DashboardMedia.xcassets in Resources */,
 				CC42FC36210F56F100E80907 /* TopHighlightView.xib in Resources */,
+				CC90031521B5A2B20066E770 /* Dashboard.json in Resources */,
 				3E3FE57D20B433AB000C3783 /* PaymentsStoryboard.storyboard in Resources */,
 				CC42FC30210B5E8800E80907 /* Payments.json in Resources */,
 				CC42FCAA211DB68200E80907 /* DashboardPaymentCell.xib in Resources */,
@@ -607,10 +611,10 @@
 				CC42FC482112FC2500E80907 /* DashboardPaymentCell.swift in Sources */,
 				CC42FC2A210B15E300E80907 /* DashboardInteractor.swift in Sources */,
 				CC42FC24210B123500E80907 /* LastPaymentsViewController.swift in Sources */,
-				CC63FA5321981EA5009DC43E /* ApplicationService.swift in Sources */,
 				CC42FC462112EC5B00E80907 /* DashboardPaymentViewModel.swift in Sources */,
 				3E6F83E7206958F7004AF262 /* NetworkService.swift in Sources */,
 				CC42FC20210B11DA00E80907 /* DashboardModule.swift in Sources */,
+				CC90031321B5A2910066E770 /* Dashboard.swift in Sources */,
 				3E5987722061879F0024F7F7 /* ViewController.swift in Sources */,
 				CC281D8B20E284D700CE2673 /* PaymentsInteractor.swift in Sources */,
 				CC42FC2E210B5DA300E80907 /* DashboardPayment.swift in Sources */,

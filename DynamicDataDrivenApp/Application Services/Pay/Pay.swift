@@ -8,56 +8,6 @@
 
 import Foundation
 
-enum ReservedKeyword: String {
-    
-    case serviceParameters = "serviceParameters"
-    case execute = "execute"
-    case open = "open"
-    case module = "module"
-    case method = "method"
-    case parameters = "parameters"
-    case callback = "callback"
-    case error = "error"
-    case response = "response.paymentToken"
-}
-
-enum ValueType {
-    
-    case none
-    case int
-    case float
-    case double
-    case string
-    case dictionary
-    case array
-    
-    init?(_ value: Any) {
-        
-        switch value {
-        case is Int:
-            self = .int
-        case is Float:
-            self = .float
-        case is Double:
-            self = .double
-        case is String:
-            self = .string
-        case is Dictionary<String,Any>:
-            self = .dictionary
-        case is Array<Any>:
-            self = .array
-        default:
-            self = .none
-        }
-    }
-    
-    var isNumber: Bool {
-        return [.int, .float, .double].contains(self)
-    }
-    var isValue: Bool {
-        return [.int, .float, .double, .string].contains(self)
-    }
-}
 
 
 class Pay: ApplicationServiceType {
@@ -71,7 +21,7 @@ class Pay: ApplicationServiceType {
     
 
     
-    required init?(jsonFilename: String) {
+    required init?(jsonFilename: String?) {
         
         guard let filepath = Bundle.main.path(forResource: jsonFilename, ofType: "json"),
             let url = URL(string: filepath),

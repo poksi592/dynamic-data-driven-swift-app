@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     var interactor: PaymentsInteractor?
+    let dashboard = Dashboard()
     
     override func viewDidLoad() {
         
@@ -20,7 +21,8 @@ class ViewController: UIViewController {
     
     @IBAction func toPayments() {
         
-        ApplicationServices.shared.showDashboard()
+        //ApplicationServices.shared.showDashboard()
+        dashboard.run()
     }
 }
 
