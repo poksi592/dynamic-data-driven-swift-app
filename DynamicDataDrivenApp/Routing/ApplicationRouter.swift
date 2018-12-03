@@ -62,7 +62,8 @@ class ApplicationRouter: ApplicationRouterType {
     
     // We have registered 2 modules for now...
     var instantiatedModules: [ModuleType] = [PaymentModule(),
-                                             DashboardModule()]
+                                             DashboardModule(),
+                                             LoginModule()]
 }
 
 @objc class URLRouter: URLProtocol, URLSessionDataDelegate, URLSessionTaskDelegate {

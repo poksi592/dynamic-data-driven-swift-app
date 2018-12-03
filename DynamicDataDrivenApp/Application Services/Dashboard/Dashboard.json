@@ -10,7 +10,24 @@
                     "presentationMode": "navigationStack",
                     "viewController": "DashboardViewControllerId"
                 },
-                "%%callback": []
+                "%%callback": [
+                    {
+                        "%%response.refundTapped": [
+                            {
+                                "%%open": {
+                                    "%%module": "login",
+                                    "%%method": "/login",
+                                    "%%parameters": {
+                                        "presentationMode": "modal",
+                                        "viewController": "LoginViewControllerId"
+                                    },
+                                    "%%callback": [
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
             }
         }
     ]

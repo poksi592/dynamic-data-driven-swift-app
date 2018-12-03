@@ -76,6 +76,12 @@
 		CC858FC7213535B10047BE28 /* DashboardAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC858FC6213535B10047BE28 /* DashboardAnalytics.swift */; };
 		CC90031321B5A2910066E770 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90031221B5A2910066E770 /* Dashboard.swift */; };
 		CC90031521B5A2B20066E770 /* Dashboard.json in Resources */ = {isa = PBXBuildFile; fileRef = CC90031421B5A2B20066E770 /* Dashboard.json */; };
+		CC90031C21B5CF5C0066E770 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90031721B5CF5C0066E770 /* LoginPresenter.swift */; };
+		CC90031D21B5CF5C0066E770 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90031821B5CF5C0066E770 /* LoginViewController.swift */; };
+		CC90031E21B5CF5C0066E770 /* LoginWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90031921B5CF5C0066E770 /* LoginWireframe.swift */; };
+		CC90031F21B5CF5C0066E770 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90031A21B5CF5C0066E770 /* LoginInteractor.swift */; };
+		CC90032021B5CF5C0066E770 /* LoginModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90031B21B5CF5C0066E770 /* LoginModule.swift */; };
+		CC90032221B5D28A0066E770 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC90032121B5D28A0066E770 /* LoginStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +177,12 @@
 		CC858FC6213535B10047BE28 /* DashboardAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardAnalytics.swift; sourceTree = "<group>"; };
 		CC90031221B5A2910066E770 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		CC90031421B5A2B20066E770 /* Dashboard.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Dashboard.json; sourceTree = "<group>"; };
+		CC90031721B5CF5C0066E770 /* LoginPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		CC90031821B5CF5C0066E770 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CC90031921B5CF5C0066E770 /* LoginWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWireframe.swift; sourceTree = "<group>"; };
+		CC90031A21B5CF5C0066E770 /* LoginInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		CC90031B21B5CF5C0066E770 /* LoginModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModule.swift; sourceTree = "<group>"; };
+		CC90032121B5D28A0066E770 /* LoginStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +213,7 @@
 		3E3FE54120B36435000C3783 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				CC90032121B5D28A0066E770 /* LoginStoryboard.storyboard */,
 				3E3FE57C20B433AB000C3783 /* PaymentsStoryboard.storyboard */,
 				CC42FC1D210B07F500E80907 /* DashboardStoryboard.storyboard */,
 			);
@@ -293,6 +306,7 @@
 		3E5987A620618A290024F7F7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CC90031621B5CBB40066E770 /* Login */,
 				CC42FC1C210B07A800E80907 /* Dashboard */,
 				3E3FE58020B44E1E000C3783 /* Payments */,
 			);
@@ -447,6 +461,18 @@
 			path = Dashboard;
 			sourceTree = "<group>";
 		};
+		CC90031621B5CBB40066E770 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CC90031A21B5CF5C0066E770 /* LoginInteractor.swift */,
+				CC90031B21B5CF5C0066E770 /* LoginModule.swift */,
+				CC90031721B5CF5C0066E770 /* LoginPresenter.swift */,
+				CC90031821B5CF5C0066E770 /* LoginViewController.swift */,
+				CC90031921B5CF5C0066E770 /* LoginWireframe.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -564,6 +590,7 @@
 				CC42FC3C2110546400E80907 /* DashboardMedia.xcassets in Resources */,
 				CC42FC36210F56F100E80907 /* TopHighlightView.xib in Resources */,
 				CC90031521B5A2B20066E770 /* Dashboard.json in Resources */,
+				CC90032221B5D28A0066E770 /* LoginStoryboard.storyboard in Resources */,
 				3E3FE57D20B433AB000C3783 /* PaymentsStoryboard.storyboard in Resources */,
 				CC42FC30210B5E8800E80907 /* Payments.json in Resources */,
 				CC42FCAA211DB68200E80907 /* DashboardPaymentCell.xib in Resources */,
@@ -604,6 +631,7 @@
 				CC42FC22210B11ED00E80907 /* DashboardViewController.swift in Sources */,
 				3E3FE53B20A9BADC000C3783 /* ApplicationRouter.swift in Sources */,
 				3E6F83E32066AA6E004AF262 /* Bundle.swift in Sources */,
+				CC90031C21B5CF5C0066E770 /* LoginPresenter.swift in Sources */,
 				CC42FC4A21144ECE00E80907 /* PaymentDetailViewController.swift in Sources */,
 				CC42FC28210B13A500E80907 /* DashboardWireframe.swift in Sources */,
 				3E3FE58320B45399000C3783 /* VCExtensions.swift in Sources */,
@@ -611,18 +639,22 @@
 				CC42FC482112FC2500E80907 /* DashboardPaymentCell.swift in Sources */,
 				CC42FC2A210B15E300E80907 /* DashboardInteractor.swift in Sources */,
 				CC42FC24210B123500E80907 /* LastPaymentsViewController.swift in Sources */,
+				CC90031F21B5CF5C0066E770 /* LoginInteractor.swift in Sources */,
 				CC42FC462112EC5B00E80907 /* DashboardPaymentViewModel.swift in Sources */,
 				3E6F83E7206958F7004AF262 /* NetworkService.swift in Sources */,
 				CC42FC20210B11DA00E80907 /* DashboardModule.swift in Sources */,
 				CC90031321B5A2910066E770 /* Dashboard.swift in Sources */,
+				CC90032021B5CF5C0066E770 /* LoginModule.swift in Sources */,
 				3E5987722061879F0024F7F7 /* ViewController.swift in Sources */,
 				CC281D8B20E284D700CE2673 /* PaymentsInteractor.swift in Sources */,
+				CC90031E21B5CF5C0066E770 /* LoginWireframe.swift in Sources */,
 				CC42FC2E210B5DA300E80907 /* DashboardPayment.swift in Sources */,
 				CC42FC26210B12B800E80907 /* DashboardPresenter.swift in Sources */,
 				CC42FC44211197DB00E80907 /* TopHighlightsSectionViewModel.swift in Sources */,
 				3E3FE54020B00CAA000C3783 /* WireframeType.swift in Sources */,
 				CC42FC40211079DC00E80907 /* TopHighlightsSectionView.swift in Sources */,
 				CC281D9320E524C300CE2673 /* PaymentsPresenter.swift in Sources */,
+				CC90031D21B5CF5C0066E770 /* LoginViewController.swift in Sources */,
 				3E6F83E12065756F004AF262 /* URLExtensions.swift in Sources */,
 				CC281D8F20E3935C00CE2673 /* WeakContainer.swift in Sources */,
 				CC281D9120E4C9CF00CE2673 /* ApplicationServices.swift in Sources */,
